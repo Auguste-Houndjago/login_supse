@@ -37,7 +37,7 @@ const user = await getUserInfo();
 if (!user) {
   return("/")
 }
-const patientId = user?.id || "da8b2596-9f17-49fa-9535-33e66ece3b37"
+const patientId = user?.id!
 
   const medecin = await getNewVisitMedecinById(medecinId);
 
@@ -81,7 +81,7 @@ const patientId = user?.id || "da8b2596-9f17-49fa-9535-33e66ece3b37"
           <h2 className="text-2xl text-center font-semibold mb-4">
             Disponibilités & prise de rendez-vous
           </h2>
-       {medecin.user?.id ? (
+       {medecin.id && patientId ? (
             <PatientCalendar patientId={patientId} medecinId={medecin.id} />
           ) : null}
     

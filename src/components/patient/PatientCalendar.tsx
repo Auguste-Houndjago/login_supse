@@ -70,7 +70,7 @@ export default function PatientCalendar({
             <h1> Choisisez une heure disponible pour le rendez-vous </h1>
             <div className="flex flex-col py-2 border-y gap-4 overflow-y-scroll scrollbar-hidden" >
               {filteredDisponibilites?.map((slot)=>(
-              <TimeOption key={slot.id} slot={slot} />
+              <TimeOption key={slot.id} slot={slot} patientId={patientId} />
               ))}
             </div>
             

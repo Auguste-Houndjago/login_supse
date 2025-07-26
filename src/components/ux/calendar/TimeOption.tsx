@@ -15,8 +15,7 @@ export default function TimeOption({slot, patientId}:{slot:DisponibiliteAvecRend
     <TimeSlotView slot={slot}  />
 
 
-
-{ slot.rendezVous.patientId === patientId ? (
+{ slot.rendezVous && slot.rendezVous.patientId && slot.rendezVous.patientId === patientId ? (
 
 <PatientConfirmVisit   statut={slot.rendezVous?.statut}   />
 ):(
