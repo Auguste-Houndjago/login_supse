@@ -48,12 +48,6 @@ const patientId = user?.id!
 
   return (
     <main className="max-w-6xl w-full flex flex-col gap-y-14  mx-auto lg:px-12 p-6">
-
-
-      <pre>
-        {JSON.stringify(medecin, null, 2)}
-      </pre>
-
       <section className="mb-8 flex flex-col items-center">
         <h1 className="text-3xl font-semibold mb-4">
           Rendez-vous avec Dr. {medecin.user.prenom} {medecin.user.nom}

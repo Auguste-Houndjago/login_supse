@@ -4,6 +4,7 @@ import { RendezVousList } from "@/components/medecin/RendevousList";
 import { MedecinProfileCard } from "@/components/medecin/MedecinProfileCard";
 import { ScrollTransition } from "@/components/animation/ScrollTransition";
 import NextVisit from '@/components/medecin/NextVisit';
+import PatientsRdv from '@/components/medecin/patients/PatientsRdv';
 
 export default async function page() {
   const user = await getUserInfo();
@@ -33,6 +34,7 @@ export default async function page() {
           
         </ScrollTransition>
 
+<PatientsRdv/>
     </div>
   );
 }
