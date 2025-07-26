@@ -96,10 +96,7 @@ function EditProfile({ onProfileUpdate }: EditProfileProps) {
   });
 
   // Mémoisation du calcul de l'âge
-  const currentAge = useMemo(() => 
-    calculateAge(formData.dateNaissance), 
-    [formData.dateNaissance]
-  );
+up
 
   // Callback pour la mise à jour des champs
   const handleInputChange = useCallback((field: string, value: string) => {
