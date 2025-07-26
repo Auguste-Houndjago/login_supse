@@ -14,7 +14,7 @@ export default async function NavBar() {
 
   const role = userInfo?.role || "PATIENT"
   const email = userInfo?.email || ""
-  const name = userInfo?.name || "";
+  const name = userInfo?.nom + " " + userInfo?.prenom || "";
 
 
   return (
