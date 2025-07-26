@@ -39,7 +39,7 @@ export default function ConfirmVisit({
       
       className={`w-fit min-w-2 px-px h-12 rounded-md border bg-background ${className}`}
     >
-      <SlideButton autoReset   {...slideButtonProps} />
+      <SlideButton    {...slideButtonProps} />
     </HoverSlideOverlay>
   )
 }

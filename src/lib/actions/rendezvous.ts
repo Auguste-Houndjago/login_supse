@@ -249,6 +249,8 @@ cree rendevous depuis disponibilite
 
 
 
+import { revalidatePath } from "next/cache";
+
 export default async function createRendezVous(data:{disponibiliteId: string; patientId?: string; motif: string; statut?: Statut; type: TypeRendezVousEnum; meta?: any;}) {
 
   const supabase = await createClient();
@@ -301,6 +303,10 @@ export default async function createRendezVous(data:{disponibiliteId: string; pa
       where: { id: disponibiliteId },
       data: { status: "RESERVE" },
     });
+
+    // Revalider la page des rendez-vous
+    revalidatePath('/rendez-vous/nouveau/[medecinId]', 'page');
+    // revalidatePath('/rendez-vous', 'page');
 
     return { success: true, rendezVous };
   } catch (error) {

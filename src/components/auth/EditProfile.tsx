@@ -92,12 +92,8 @@ function EditProfile({ onProfileUpdate }: EditProfileProps) {
     nom: '',
     email: '',
     telephone: '',
-    dateNaissance: null,
     adresse: '',
   });
-
-  // Mémoisation de la date maximale pour éviter les recalculs
-  const maxBirthDate = useMemo(() => getMaxBirthDate(), []);
 
   // Mémoisation du calcul de l'âge
   const currentAge = useMemo(() => 
@@ -125,7 +121,6 @@ function EditProfile({ onProfileUpdate }: EditProfileProps) {
         nom: profile.nom || '',
         email: profile.email || '',
         telephone: profile.telephone || '',
-        dateNaissance: formatBirthDate(profile.dateNaissance),
         adresse: profile.adresse || '',
       });
     }
@@ -144,16 +139,6 @@ function EditProfile({ onProfileUpdate }: EditProfileProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Vérification de l'âge minimum
-    if (currentAge === null || currentAge < 18) {
-      toast({
-        title: "Âge minimum requis",
-        description: "Vous devez avoir au moins 18 ans pour modifier votre profil.",
-        variant: "destructive"
-      });
-      return;
-    }
-
     try {
       const formDataToSubmit = new FormData();
       if (!profile?.id) return;
@@ -268,28 +253,7 @@ function EditProfile({ onProfileUpdate }: EditProfileProps) {
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor={`${id}-dateNaissance`}>Date de naissance</Label>
-                <Input
-                  id={`${id}-dateNaissance`}
-                  name="dateNaissance"
-                  value={formData.dateNaissance}
-                  onChange={(e) => handleInputChange('dateNaissance', e.target.value)}
-                  type="date"
-                  max={maxBirthDate}
-                  className={currentAge !== null && currentAge < 18 ? "border-red-500" : ""}
-                />
-                {formData.dateNaissance && (
-                  <div className="text-sm">
-                    {currentAge !== null && (
-                      <p className={`${currentAge < 18 ? 'text-red-500' : 'text-muted-foreground'}`}>
-                        Âge: {currentAge} ans
-                        {currentAge < 18 && " (minimum 18 ans requis)"}
-                      </p>
-                    )}
-                  </div>
-                )}
-              </div>
+              {/* Champ date de naissance supprimé */}
 
               <div className="space-y-2">
                 <Label htmlFor={`${id}-adresse`}>Adresse</Label>
@@ -312,7 +276,6 @@ function EditProfile({ onProfileUpdate }: EditProfileProps) {
                 <Button 
                   type="submit" 
                   className="flex items-center gap-2"
-                  disabled={currentAge !== null && currentAge < 18}
                 >
                   <Check size={16} />
                   Enregistrer

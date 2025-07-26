@@ -18,7 +18,7 @@ export function getPatientButtonPropsByStatut(
       }
     case "EN_ATTENTE":
       return {
-        text: "Confirmer",
+        text: " En Attente de validation",
         successText: "Visite confirmer",
         loadingText: "Validation...",
         disabled: false,
@@ -80,6 +80,7 @@ export function getButtonPropsByStatut(
         loadingText: "Validation...",
         disabled: false,
         resolveTo:"success",
+        
       
         
       }
@@ -184,8 +185,8 @@ export function getPatientHoverSlideOverlayPropsByStatut(
       }
     case "EN_ATTENTE":
       return {
-        withHover: false,
-        text: "En Attente"
+        withHover: true,
+        text: "DEMANDE REÇU"
       }
     
     case "CONFIRME":
