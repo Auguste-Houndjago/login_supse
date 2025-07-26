@@ -14,6 +14,8 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useState } from "react";
 import { useSignUp, SignUpMode } from "@/hooks/useSignUp";
+import { CardHeader as LoginCardHeader } from "../design/LoginCardHeader";
+import { BGPattern } from "../design/BGPattern";
 
 export function SignUpForm({
   className,
@@ -32,13 +34,23 @@ export function SignUpForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-2xl">Sign up {mode} </CardTitle>
-          <CardDescription>Create a new account</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSignUp}>
+      <div className="flex w-full border justify-center items-center">
+        <LoginCardHeader
+          title={`INSTCRIPTION`}
+          description="Créez un nouveau compte"
+        />
+      </div>
+      <div className="rounded relative border bg-background text-foreground shadow-sm">
+        <div className="border-b p-6">
+          <h2 className="text-2xl font-semibold leading-none tracking-tight" />
+          <p className="text-sm relative text-muted-foreground text-center bg-background/85">
+            <BGPattern variant="diagonal-stripes" mask="fade-y" />
+            Entrez vos informations pour créer un compte
+          </p>
+        </div>
+        <div className="p-6">
+          <form className="relative" onSubmit={handleSignUp}>
+             <BGPattern variant="dots" mask="fade-center" />
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
@@ -53,7 +65,7 @@ export function SignUpForm({
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">Mot de passe</Label>
                 </div>
                 <Input
                   id="password"
@@ -65,7 +77,7 @@ export function SignUpForm({
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="repeat-password">Repeat Password</Label>
+                  <Label htmlFor="repeat-password">Répéter le mot de passe</Label>
                 </div>
                 <Input
                   id="repeat-password"
@@ -77,18 +89,18 @@ export function SignUpForm({
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Creating an account..." : "Sign up"}
+                {isLoading ? "Création du compte..." : "S'inscrire"}
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
-              Already have an account?{" "}
+              Vous avez déjà un compte ?{" "}
               <Link href="/auth/login" className="underline underline-offset-4">
-                Login
+                Se connecter
               </Link>
             </div>
           </form>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
