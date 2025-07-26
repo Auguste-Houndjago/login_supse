@@ -6,7 +6,7 @@ interface layoutProps {
 
 export default function layout({children}: layoutProps) {
   return (
-    <div suppressHydrationWarning className='h-full flex flex-col w-full'>
+    <div className='h-full flex flex-col w-full'>
 
         {children}
         
