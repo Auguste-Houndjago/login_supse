@@ -12,11 +12,11 @@ export function AuthPopover() {
   return (
     <div className="flex flex-col">
         <div className="flex flex-col md:hidden gap-2">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="outline"> <UserPlus/> </Button>
+            <Popover >
+              <PopoverTrigger  asChild>
+                <Button variant="outline" className="rounded-2xl py-0 w-fit"> <UserPlus/> </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-42 flex flex-col items-center justify-center gap-2 p-2">
+              <PopoverContent arrowPadding={1} className="w-42 flex flex-col items-center justify-center gap-2 p-2">
                 <Button asChild size="sm" className="w-full" variant="outline">
                   <Link href="/auth/login">Se connecter</Link>
                 </Button>

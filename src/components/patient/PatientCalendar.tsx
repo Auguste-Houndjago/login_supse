@@ -12,7 +12,8 @@ import { useCalendar } from "@/hooks/use-calendar";
 
 
 interface PatientCalendarProps {
-  medecinId: string
+  medecinId: string;
+  patientId:string ;
 }
 
 /**
@@ -20,10 +21,9 @@ interface PatientCalendarProps {
  * Gère l'affichage et les interactions avec le calendrier, les créneaux et les rendez-vous
  */
 export default function PatientCalendar({
-  medecinId,
+  medecinId,patientId
 }: PatientCalendarProps) {
-  const { user } = useUserProfile()
-  const patientId = user?.id
+
 
   const { disponibilites, createDisponibilite ,removeDisponibilite } = useDisponibilites({medecinId})
   const { rendezVous, loading: loadingRdv } = useRendezVous(medecinId);
@@ -36,10 +36,7 @@ export default function PatientCalendar({
     navigateMonth,
   } = useCalendar(rendezVous)
 
-  // Vérification de l'utilisateur après tous les hooks
-  if (!user || !user.id) {
-    return <div>Redirection...</div>
-  }
+
 
   console.log("Disponibilités :", disponibilites);
 

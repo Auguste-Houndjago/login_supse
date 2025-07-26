@@ -38,12 +38,14 @@ export async function AuthButton({name, avatarUrl,role, user}:{name?:string, ava
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48 bg-popover text-popover-foreground">
         <div className="px-3 py-1.5 gap-2 text-sm font-medium">{name}</div>
+        <span> {role} </span>
+
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <EditProfile />
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/settings">Paramètres</Link>
+          <Link href="#">Paramètres</Link>
       
         </DropdownMenuItem>
         <DropdownMenuSeparator />

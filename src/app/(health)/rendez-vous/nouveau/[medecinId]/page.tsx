@@ -9,6 +9,7 @@ import PatientCalendar from "@/components/patient/PatientCalendar"
 import { ProfileCard } from "@/components/ux/ProfileCard"
 import { getMedecinById, getNewVisitMedecinById } from "@/lib/actions/medecins"
 import { MedecinCard } from "@/components/ux/MedecinCard"
+import { getUserInfo } from "@/lib/users/getUserInfo"
 
 // Mapping spécialité -> terme adéquat
 const SPECIALITE_TERMS: Record<string, string> = {
@@ -27,18 +28,31 @@ const SPECIALITE_TERMS: Record<string, string> = {
 export default async function MedecinPage({
   params,
 }: {
-  params: { medecinId: string };
+  params: Promise<{ medecinId: string }>;
 }) {
-  const medecinId = params.medecinId;
+  // Attente de la résolution de la promesse
+  const { medecinId } = await params;
+const user = await getUserInfo();
+
+if (!user) {
+  return("/")
+}
+const patientId = user?.id || "da8b2596-9f17-49fa-9535-33e66ece3b37"
 
   const medecin = await getNewVisitMedecinById(medecinId);
 
-  if (!medecin) {
+  console.log("medecin: ", medecin);
+  if (!medecin || !medecin.user) {
     return ("/rendez-vous/nouveau")
   }
 
   return (
     <main className="max-w-6xl w-full flex flex-col gap-y-14  mx-auto lg:px-12 p-6">
+
+
+      <pre>
+        {JSON.stringify(medecin, null, 2)}
+      </pre>
 
       <section className="mb-8 flex flex-col items-center">
         <h1 className="text-3xl font-semibold mb-4">
@@ -67,9 +81,10 @@ export default async function MedecinPage({
           <h2 className="text-2xl text-center font-semibold mb-4">
             Disponibilités & prise de rendez-vous
           </h2>
-          <PatientCalendar
-          medecinId={medecin.id}
-          />
+       {medecin.user?.id ? (
+            <PatientCalendar patientId={patientId} medecinId={medecin.id} />
+          ) : null}
+    
         </section>
       </div>
     </main>

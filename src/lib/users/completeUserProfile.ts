@@ -11,6 +11,7 @@ export async function updateUserMetadata({
   const supabase = await createClient();
   const { error } = await supabase.auth.updateUser( {
  data:{
+  ...data,
   completedProfile:true
  }
   });

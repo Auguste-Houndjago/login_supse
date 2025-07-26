@@ -92,7 +92,7 @@ function EditProfile({ onProfileUpdate }: EditProfileProps) {
     nom: '',
     email: '',
     telephone: '',
-    dateNaissance: '',
+    dateNaissance: null,
     adresse: '',
   });
 
