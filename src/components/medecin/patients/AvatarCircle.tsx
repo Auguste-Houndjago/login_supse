@@ -63,7 +63,7 @@ export default function CircularAvatars({ users, onSelect, selectedId }: Patient
           return (
             <div
               key={avatar.id ?? index}
-              className={`absolute transition-all duration-300 hover:scale-110 hover:z-10 ${selectedId === avatar.id ? 'ring-2 ring-primary' : ''}`}
+              className={`absolute transition-all duration-300 hover:scale-110 rounded-full h-fit w-fit  hover:z-10 `}
               style={{
                 left: `${x}px`,
                 top: `${y}px`,
@@ -72,11 +72,11 @@ export default function CircularAvatars({ users, onSelect, selectedId }: Patient
               }}
               onClick={() => onSelect?.(String(avatar.id))}
             >
-              <div className="group relative">
+              <div className="group h-fit relative">
                 <Avatar 
                   src={avatar.src} 
                   fallback={avatar.fallback}
-                  className="border-3 border shadow-lg hover:shadow-xl transition-shadow duration-200"
+                  className={`border-3 border shadow-lg hover:shadow-xl transition-shadow duration-200 ${selectedId === avatar.id ? 'ring-2 ring-primary/80' : ''} `}
                 />
                 {/* Tooltip */}
                 <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-20">

@@ -22,7 +22,7 @@ export default function PatienInfoGrid({medecinId}: {medecinId: string}) {
     const handleSelect = (id: string) => setSelectedPatientId(id)
 
     return (
-        <div className='flex md:flex-row flex-col gap-8 md:gap-0 border'>
+        <div className='flex md:flex-row flex-col gap-8 md:gap-0 '>
             <PatientInfo patient={selectedPatient} />
             <CircularAvatars users={AvatarPatients} onSelect={handleSelect} selectedId={selectedPatientId ?? undefined} />
         </div>

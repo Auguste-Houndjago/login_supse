@@ -5,6 +5,7 @@ import { MedecinProfileCard } from "@/components/medecin/MedecinProfileCard";
 import { ScrollTransition } from "@/components/animation/ScrollTransition";
 import NextVisit from '@/components/medecin/NextVisit';
 import PatientsRdv from '@/components/medecin/patients/PatientsRdv';
+import PatientsRdvList from '@/components/medecin/VisitModal';
 
 export default async function page() {
   const user = await getUserInfo();
@@ -33,8 +34,10 @@ export default async function page() {
 
           
         </ScrollTransition>
-
-<PatientsRdv/>
+<div className='flex justify-center items-center'>
+  <PatientsRdvList medecinId={user.id} />
+</div>
+{/* <PatientsRdv medecinId={user.id} /> */}
     </div>
   );
 }
