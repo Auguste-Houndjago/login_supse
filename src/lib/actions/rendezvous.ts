@@ -2,6 +2,7 @@
 import { prisma } from "@/lib/prisma";
 import { createClient } from "@/lib/supabase/server";
 import { sendMail } from '@/lib/sendMail';
+import { revalidatePath } from "next/cache";
 
 import { Statut, TypeRendezVousEnum } from "@prisma/client";
 
@@ -98,24 +99,6 @@ export async function getDisponibilitesWithRendezVous(medecinId: string, date?: 
 }
 
 
-
-
-
-// export async function createRendezVous(data: {
-//   disponibiliteId: string;
-//   patientId: string;
-//   medecinId: string;
-//   dateDebut: Date;
-//   dateFin?: Date;
-//   motif: string;
-//   statut?: Statut;
-//   type: TypeRendezVousEnum;
-//   meta?: any;
-// }) {
-//   return prisma.rendezVous.create({
-//     data,
-//   });
-// }
 
 export async function cancelRendezVous(id: string) {
   return prisma.rendezVous.update({
@@ -249,7 +232,40 @@ cree rendevous depuis disponibilite
 
 
 
-import { revalidatePath } from "next/cache";
+
+
+async function sendRendezVousMail({
+  patientEmail,
+  medecinEmail,
+  medecinNom,
+  patientNom,
+  dateDebut,
+  dateFin,
+  motif,
+  type
+}: {
+  patientEmail: string;
+  medecinEmail: string;
+  medecinNom: string;
+  patientNom: string;
+  dateDebut: Date;
+  dateFin: Date;
+  motif: string;
+  type: string;
+}) {
+  // Mail au patient
+  await sendMail({
+    to: patientEmail,
+    subject: "Confirmation de votre rendez-vous médical",
+    text: `Bonjour ${patientNom},\n\nVotre rendez-vous avec le Dr. ${medecinNom} est confirmé.\nDate : ${dateDebut.toLocaleString()}\nMotif : ${motif}\nType : ${type}\n\nMerci de votre confiance.`
+  });
+  // Mail au médecin
+  await sendMail({
+    to: medecinEmail,
+    subject: "Nouveau rendez-vous patient",
+    text: `Bonjour Dr. ${medecinNom},\n\nUn nouveau rendez-vous a été pris par ${patientNom}.\nDate : ${dateDebut.toLocaleString()}\nMotif : ${motif}\nType : ${type}`
+  });
+}
 
 export default async function createRendezVous(data:{disponibiliteId: string; patientId?: string; motif: string; statut?: Statut; type: TypeRendezVousEnum; meta?: any;}) {
 
@@ -303,6 +319,25 @@ export default async function createRendezVous(data:{disponibiliteId: string; pa
       where: { id: disponibiliteId },
       data: { status: "RESERVE" },
     });
+
+    // Récupérer les infos patient et médecin pour l'email
+    const patient = await prisma.user.findUnique({ where: { id: patientId } });
+    const medecin = await prisma.medecin.findUnique({
+      where: { id: medecinId },
+      include: { user: true }
+    });
+    if (patient && medecin && medecin.user) {
+      await sendRendezVousMail({
+        patientEmail: patient.email,
+        medecinEmail: medecin.user.email,
+        medecinNom: medecin.user.prenom + ' ' + medecin.user.nom,
+        patientNom: patient.prenom + ' ' + patient.nom,
+        dateDebut,
+        dateFin,
+        motif,
+        type
+      });
+    }
 
     // Revalider la page des rendez-vous
     revalidatePath('/rendez-vous/nouveau/[medecinId]', 'page');

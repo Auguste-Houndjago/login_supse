@@ -1,9 +1,8 @@
-import { User } from 'lucide-react'
+
 import React, { useEffect, useState } from 'react'
 import AvatarUserSelect, { UserInfo } from '../user/AvatarSelect'
-import { getPatientsByMedecinId } from '@/lib/actions/medecins'
 import { usePatientsByMedecin } from '@/hooks/usePatientsByMedecin'
-import UserIcon from '../user/UserIcon'
+
 import { UserInfoPopover } from '../user/UserInfoPopover'
 
 interface PatientAddProps {
