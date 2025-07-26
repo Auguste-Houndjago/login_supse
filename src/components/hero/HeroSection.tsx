@@ -32,7 +32,7 @@ export default function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="text-lg px-8 py-6">
                 <Link
-                  href="/protected/patient/rendez-vous"
+                  href="#"
                   className="flex items-center gap-2"
                 >
                   <Calendar className="w-5 h-5" />
@@ -46,7 +46,7 @@ export default function HeroSection() {
                 asChild
                 className="text-lg px-8 py-6"
               >
-                <Link href="/protected/patient/info/about">En savoir plus</Link>
+                <Link href="#">En savoir plus</Link>
               </Button>
             </div>
 

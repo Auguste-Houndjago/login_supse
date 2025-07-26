@@ -19,7 +19,7 @@ export default function CallToActionSection() {
           className="bg-background text-foreground hover:bg-muted text-lg px-8 py-6"
         >
           <Link
-            href="/protected/patient/rendez-vous"
+            href="#"
             className="flex items-center gap-2"
           >
             <Calendar className="w-5 h-5" />

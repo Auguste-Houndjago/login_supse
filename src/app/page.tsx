@@ -35,7 +35,7 @@ export default function Home() {
               <ul className="space-y-2 text-muted-foreground">
                 <li>
                   <Link
-                    href="/protected/patient/info/about"
+                    href="#"
                     className="hover:text-foreground transition-colors"
                   >
                     À propos
@@ -43,7 +43,7 @@ export default function Home() {
                 </li>
                 <li>
                   <Link
-                    href="/protected/patient/info/faq"
+                    href="#"
                     className="hover:text-foreground transition-colors"
                   >
                     FAQ

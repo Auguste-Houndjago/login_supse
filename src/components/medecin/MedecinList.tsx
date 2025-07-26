@@ -37,7 +37,7 @@ export default function MedecinList() {
       {medecins.map((medecin) => (
         <Link
           key={medecin.id}
-          href={`/protected/medecin/${medecin.id}`}
+          href={`/medecin/${medecin.id}`}
           className="flex flex-col items-center text-center rounded-lg border p-4 shadow-sm bg-white h-full hover:bg-gray-50 transition cursor-pointer focus:outline-none"
         >
           <div className="w-16 h-16 mb-3">

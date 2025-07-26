@@ -24,7 +24,7 @@ export function NavLink({ role, email }: NavLinkProps) {
     ]
   } else if (role === "ADMIN"|| email ==="ogwoprecious21@gmail.com") {
     links = [
-      { href: "/protected/dashboard", label: "Dashboard" },
+      { href: "#", label: "Dashboard" },
     ]
   } else if (role === "SECRETAIRE") {
     links = [
